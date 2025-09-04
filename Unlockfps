@@ -1,0 +1,49 @@
+-- 🌟 FPS BOOST + UNLOCK FPS (Universal)
+-- Made by   ChatGPT
+
+-- ⚡ FPS BOOST
+local function FPSBoost()
+    -- Tắt hiệu ứng thừa
+    for _, v in pairs(game:GetDescendants()) do
+        if v:IsA("ParticleEmitter") or v:IsA("Trail") then
+            v.Lifetime = NumberRange.new(0)
+        elseif v:IsA("Explosion") then
+            v.BlastPressure = 1
+            v.BlastRadius = 1
+        elseif v:IsA("Fire") or v:IsA("Smoke") then
+            v.Enabled = false
+        elseif v:IsA("Decal") or v:IsA("Texture") then
+            v:Destroy()
+        elseif v:IsA("MeshPart") then
+            v.Material = Enum.Material.Plastic
+            v.Reflectance = 0
+        elseif v:IsA("UnionOperation") or v:IsA("Part") then
+            v.Material = Enum.Material.Plastic
+            v.Reflectance = 0
+        end
+    end
+
+    -- Giảm chất lượng Lighting
+    if game.Lighting:FindFirstChild("Atmosphere") then game.Lighting.Atmosphere:Destroy() end
+    if game.Lighting:FindFirstChild("Sky") then game.Lighting.Sky:Destroy() end
+    if game.Lighting:FindFirstChild("Bloom") then game.Lighting.Bloom:Destroy() end
+    if game.Lighting:FindFirstChild("ColorCorrection") then game.Lighting.ColorCorrection:Destroy() end
+    if game.Lighting:FindFirstChild("SunRays") then game.Lighting.SunRays:Destroy() end
+    if game.Lighting:FindFirstChild("DepthOfField") then game.Lighting.DepthOfField:Destroy() end
+end
+
+-- 🔓 UNLOCK FPS (hỗ trợ executor có setfpscap)
+local function UnlockFPS()
+    if setfpscap then
+        setfpscap(999) -- mở khóa FPS max
+    elseif set_fps_cap then
+        set_fps_cap(999)
+    else
+        warn("Executor không hỗ trợ unlock FPS trực tiếp!")
+    end
+end
+
+-- 🚀 Chạy tối ưu
+FPSBoost()
+UnlockFPS()
+print("✅ FPS Boost + Unlock FPS đã bật!")
